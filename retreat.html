@@ -1,306 +1,189 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinite Mind Retreat – Okinawa</title>
-  <style>
-    /* --- Dein ursprünglicher Stil als Basis --- */
-    body {
-      font-family: Arial, sans-serif; /* Deine ursprüngliche Schriftart */
-      margin: 0;
-      padding: 0;
-      background-color: #ffffff;
-      color: #333;
-      line-height: 1.6; /* Für bessere Lesbarkeit hinzugefügt */
-      overflow-x: hidden; /* Verhindert horizontales Scrollen auf manchen Geräten */
-    }
-    header {
-      background-color: #FFECF4; /* Deine Farbe */
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem; /* Deine Größe */
-    }
-    header p {
-      font-size: 1.2rem; /* Deine Größe */
-      margin-top: 0.5rem;
-    }
-    .info-bar {
-      display: flex; /* Deine Anordnung */
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem; /* Dein Abstand */
-      padding: 1rem;
-      background-color: #fdfdfd; /* Deine Farbe */
-      font-size: 1rem; /* Deine Größe */
-      text-align: center; /* Zentriert Text auf kleinen Screens */
-    }
-    .info-bar div {
-      font-size: 1rem; /* Deine Größe */
-    }
-    .section {
-      padding: 2rem 1rem; /* Dein Padding */
-      max-width: 1000px; /* Deine max-width */
-      margin: 0 auto; /* Zentrierung */
-      margin-bottom: 2rem; /* Dein Abstand */
-    }
-    /* Einige deiner ursprünglichen Klassen hatten margin-bottom,
-       was sich mit .section überschneidet.
-       Ich behalte .section margin-bottom bei, was das Gleiche bewirkt.
-       Wenn du spezifische Abstände dazwischen wolltest,
-       müssten wir das anders lösen. */
-    /* .highlights, .schedule, .included, .investment, .cta { margin-bottom: 2rem; } */
-
-    .section h2 {
-      color: #C5A66D; /* Deine Farbe */
-      margin-top: 0; /* Stellt sicher, dass kein extra Abstand oben ist */
-      margin-bottom: 1.5rem; /* Ein bisschen Abstand zur Überschrift */
-    }
-    ul {
-      padding-left: 1.5rem; /* Einrückung für Listen */
-    }
-    li {
-      margin-bottom: 0.8rem; /* Abstand zwischen Listenpunkten */
-    }
-
-    .image-gallery {
-      display: flex; /* Deine Anordnung */
-      flex-wrap: wrap;
-      gap: 1rem; /* Dein Abstand */
-      justify-content: center;
-      margin-top: 2rem; /* Abstand nach der Galerie */
-    }
-    .image-gallery img {
-      width: 48%; /* Deine Breite für 2 Spalten */
-      border-radius: 8px; /* Deine Rundung */
-      height: auto; /* Sorgt dafür, dass das Bild proportional skaliert */
-      object-fit: cover; /* Verhindert Verzerrung */
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Leichter Schatten für visuelle Trennung */
-    }
-    .cta {
-      text-align: center; /* Deine Zentrierung */
-      margin-bottom: 2rem; /* Dein Abstand */
-    }
-    .cta-button {
-      background-color: #FFECF4; /* Deine Farbe */
-      color: #333; /* Deine Farbe */
-      padding: 1rem 2rem; /* Dein Padding */
-      border: none;
-      border-radius: 5px; /* Deine Rundung */
-      font-size: 1.2rem; /* Deine Größe */
-      cursor: pointer;
-      text-decoration: none; /* Kein Unterstrich */
-      display: inline-block; /* Wichtig für Padding/Margin */
-      transition: background-color 0.3s ease; /* Für sanften Hover-Effekt */
-    }
-    .cta-button:hover {
-      background-color: #ffe0ee; /* Leichter Farbwechsel beim Hover */
-    }
-    footer {
-      background-color: #FFECF4; /* Deine Farbe */
-      text-align: center;
-      padding: 1rem; /* Dein Padding */
-      font-size: 0.9rem; /* Deine Größe */
-      color: #555; /* Etwas heller als Textfarbe */
-    }
-    .lang-switcher {
-      position: absolute; /* Deine Position */
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000; /* Sorgt dafür, dass es im Vordergrund ist */
-    }
-    .lang-switcher a {
-      color: #333;
-      text-decoration: none;
-      font-size: 0.9rem;
-      background-color: rgba(255, 255, 255, 0.7); /* Leichter Hintergrund, damit Text lesbar bleibt */
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      backdrop-filter: blur(3px); /* Leichte Unschärfe im Hintergrund (moderne Browser) */
-    }
-
-    /* --- Mobile Anpassungen (Media Queries) --- */
-    @media (max-width: 768px) {
-      /* Anpassungen für typische Tablet- und Handy-Größen */
-
-      header {
-        padding: 1.5rem 1rem; /* Etwas weniger Platz im Header */
-      }
-
-      header h1 {
-        font-size: 1.8rem; /* Überschrift etwas kleiner */
-      }
-
-      header p {
-        font-size: 1.1rem; /* Untertitel etwas kleiner */
-      }
-
-      .info-bar {
-        flex-direction: column; /* Info-Elemente untereinander anordnen */
-        gap: 0.5rem; /* Engerer Abstand, wenn untereinander */
-        padding: 1rem;
-      }
-
-      .section {
-        padding: 1.5rem 1rem; /* Weniger Padding in den Sektionen */
-        margin-bottom: 1.5rem; /* Abstand reduzieren */
-      }
-
-      .section h2 {
-        font-size: 1.6rem; /* Sektions-Überschriften kleiner */
-        margin-bottom: 1rem;
-      }
-
-      .image-gallery {
-        flex-direction: column; /* Bilder untereinander anordnen */
-        /* Kein gap hier, da die Bilder 100% Breite haben */
-        margin-top: 1.5rem;
-      }
-
-      .image-gallery img {
-        width: 100%; /* Bilder volle Breite */
-        margin-bottom: 1rem; /* Abstand zwischen gestapelten Bildern */
-      }
-
-      .cta-button {
-        font-size: 1.1rem; /* Button-Text kleiner */
-        padding: 0.8rem 1.5rem; /* Button-Padding kleiner */
-      }
-
-      .lang-switcher {
-        top: 0.5rem;
-        right: 0.5rem;
-      }
-    }
-
-    /* Anpassungen für sehr kleine Handys (optional) */
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.6rem;
-      }
-
-      header p {
-        font-size: 1rem;
-      }
-
-      .section h2 {
-        font-size: 1.4rem;
-      }
-
-      .info-bar div {
-        font-size: 0.9rem;
-      }
-    }
-
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Mind Retreat – Okinawa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #333;
+    }
+    header {
+      background-color: #FFECF4;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .info-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background-color: #fdfdfd;
+    }
+    .info-bar div {
+      font-size: 1rem;
+    }
+    .section {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section h2 {
+      color: #C5A66D;
+    }
+    .highlights, .schedule, .included, .investment, .cta {
+      margin-bottom: 2rem;
+    }
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .image-gallery img {
+      width: 48%;
+      border-radius: 8px;
+    }
+    .cta-button {
+      background-color: #FFECF4;
+      color: #333;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    footer {
+      background-color: #FFECF4;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="lang-switcher">
-    <a href="#">🇬🇧 English</a>
-  </div>
+  <div class="lang-switcher">
+    <a href="#">🇬🇧 English</a>
+  </div>
 
-    <header>
-    <h1>🌟 Infinite Mind Retreat – Okinawa, Japan</h1>
-    <p>Entfalte den Krieger in dir. Führe mit Klarheit. Lebe mit Sinn.</p>
-  </header>
+  <header>
+    <h1>🌟 Infinite Mind Retreat – Okinawa, Japan</h1>
+    <p>Entfalte den Krieger in dir. Führe mit Klarheit. Lebe mit Sinn.</p>
+  </header>
 
-    <div class="info-bar">
-    <div>📍 Okinawa, Japan</div>
-    <div>📅 7. & 8. Juni</div>
-    <div>⏳ 2 Tage voller Tiefe, Klarheit & Kraft</div>
-    <div>🎯 Für: Founder, CEOs, Visionäre</div>
-    <div>🎟 Exklusiv auf 16 Plätze limitiert</div>
-    <div>💰 Investition: 8.888 € (ca. ¥1.600.000)</div>
-  </div>
+  <div class="info-bar">
+    <div>📍 Okinawa, Japan</div>
+    <div>📅 7. & 8. Juni</div>
+    <div>⏳ 2 Tage voller Tiefe, Klarheit & Kraft</div>
+    <div>🎯 Für: Founder, CEOs, Visionäre</div>
+    <div>🎟 Exklusiv auf 16 Plätze limitiert</div>
+    <div>💰 Investition: 8.888 € (ca. ¥1.600.000)</div>
+  </div>
 
-    <div class="section retreat-vision">
-    <h2>🧭 Retreat-Vision</h2>
-    <p>High Performance trifft auf uralte Weisheit. Das Infinite Mind Retreat ist eine transformative Auszeit für Unternehmer:innen, die über sich hinauswachsen wollen – in der Wiege der Langlebigkeit: Okinawa.</p>
-  </div>
+  <div class="section retreat-vision">
+    <h2>🧭 Retreat-Vision</h2>
+    <p>High Performance trifft auf uralte Weisheit. Das Infinite Mind Retreat ist eine transformative Auszeit für Unternehmer:innen, die über sich hinauswachsen wollen – in der Wiege der Langlebigkeit: Okinawa.</p>
+  </div>
 
-    <div class="section highlights">
-    <h2>🥋 Highlight Sessions</h2>
-    <ul>
-      <li>Seibukan Karate – Fokus & Erdung mit lokalem Meister</li>
-      <li>Okinawa Teezeremonie & Slow Thinking</li>
-      <li>Okinawa Fuel – Ernährung für langes Leben</li>
-      <li>Geführtes Snorkeling – eintauchen in die Unterwasserwelt</li>
-    </ul>
-  </div>
+  <div class="section highlights">
+    <h2>🥋 Highlight Sessions</h2>
+    <ul>
+      <li>Seibukan Karate – Fokus & Erdung mit lokalem Meister</li>
+      <li>Okinawa Teezeremonie & Slow Thinking</li>
+      <li>Okinawa Fuel – Ernährung für langes Leben</li>
+      <li>Geführtes Snorkeling – eintauchen in die Unterwasserwelt</li>
+    </ul>
+  </div>
 
-    <div class="section extras">
-    <h2>✨ Weitere Highlights</h2>
-    <ul>
-      <li>THE BIG IDEA DINNER</li>
-      <li>BORN TO CREATE</li>
-      <li>DEFINE YOUR DECADES CHALLENGE</li>
-      <li>THE 100 PARTY</li>
-      <li>INTUITION MASTERY</li>
-      <li>TOP 10 TENETS OF LEADERSHIP</li>
-      <li>INFINITE SELF LESSONS – Netzwerk-Austausch</li>
-      <li>WINNING MINDSET DAILY ROUTINE</li>
-    </ul>
-  </div>
+  <div class="section extras">
+    <h2>✨ Weitere Highlights</h2>
+    <ul>
+      <li>THE BIG IDEA DINNER</li>
+      <li>BORN TO CREATE</li>
+      <li>DEFINE YOUR DECADES CHALLENGE</li>
+      <li>THE 100 PARTY</li>
+      <li>INTUITION MASTERY</li>
+      <li>TOP 10 TENETS OF LEADERSHIP</li>
+      <li>INFINITE SELF LESSONS – Netzwerk-Austausch</li>
+      <li>WINNING MINDSET DAILY ROUTINE</li>
+    </ul>
+  </div>
 
-    <div class="section schedule">
-    <h2>🧘‍♂️ Retreat Schedule</h2>
-    <p><strong>Tag 1</strong><br>
-    Ankunft & Check-in im Boutique Ryokan<br>
-    Begrüßung & Einführung<br>
-    THE BIG IDEA DINNER mit Networking</p>
-    <p><strong>Tag 2</strong><br>
-    Morgensport & Breathwork am Strand<br>
-    Seibukan Karate mit Sensei<br>
-    Okinawa Teezeremonie & Ikigai-Reflexion<br>
-    Business Vision Session & Journaling<br>
-    Geführtes Snorkeling Abenteuer<br>
-    Sound Healing & Abschlussrunde<br>
-    Optional: Therapeutische Massage</p>
-    <p><em>(Zeitlicher Ablauf kann leicht variieren)</em></p>
-  </div>
+  <div class="section schedule">
+    <h2>🧘‍♂️ Retreat Schedule</h2>
+    <p><strong>Tag 1</strong><br>
+    Ankunft & Check-in im Boutique Ryokan<br>
+    Begrüßung & Einführung<br>
+    THE BIG IDEA DINNER mit Networking</p>
+    <p><strong>Tag 2</strong><br>
+    Morgensport & Breathwork am Strand<br>
+    Seibukan Karate mit Sensei<br>
+    Okinawa Teezeremonie & Ikigai-Reflexion<br>
+    Business Vision Session & Journaling<br>
+    Geführtes Snorkeling Abenteuer<br>
+    Sound Healing & Abschlussrunde<br>
+    Optional: Therapeutische Massage</p>
+    <p><em>(Zeitlicher Ablauf kann leicht variieren)</em></p>
+  </div>
 
-    <div class="section included">
-    <h2>💡 Was ist enthalten?</h2>
-    <ul>
-      <li>✔ High-Level Mind & Leadership Coaching</li>
-      <li>✔ Okinawa Tea Ceremony</li>
-      <li>✔ Seibukan Karate Einführung</li>
-      <li>✔ Ikigai-Journaling & Intention-Setting</li>
-      <li>✔ Meditation & Nicht-Tun am Strand</li>
-      <li>✔ Okinawa Fuel Ernährung</li>
-      <li>✔ Sound Healing & Breathwork</li>
-      <li>✔ Elektro-Detox – 100% Offline-Zeit</li>
-      <li>✔ Geführte Snorkeling Session</li>
-      <li>✔ Unterkunft im Boutique Ryokan</li>
-      <li>✔ Persönliches Retreat-Journal & Willkommenspaket</li>
-      <li>✔ VIP Integration Call</li>
-      <li>➕ Zusatzoption: Therapeutische Massage – 444 €</li>
-    </ul>
-  </div>
+  <div class="section included">
+    <h2>💡 Was ist enthalten?</h2>
+    <ul>
+      <li>✔ High-Level Mind & Leadership Coaching</li>
+      <li>✔ Okinawa Tea Ceremony</li>
+      <li>✔ Seibukan Karate Einführung</li>
+      <li>✔ Ikigai-Journaling & Intention-Setting</li>
+      <li>✔ Meditation & Nicht-Tun am Strand</li>
+      <li>✔ Okinawa Fuel Ernährung</li>
+      <li>✔ Sound Healing & Breathwork</li>
+      <li>✔ Elektro-Detox – 100% Offline-Zeit</li>
+      <li>✔ Geführte Snorkeling Session</li>
+      <li>✔ Unterkunft im Boutique Ryokan</li>
+      <li>✔ Persönliches Retreat-Journal & Willkommenspaket</li>
+      <li>✔ VIP Integration Call</li>
+      <li>➕ Zusatzoption: Therapeutische Massage – 444 €</li>
+    </ul>
+  </div>
 
-    <div class="section investment">
-    <h2>💰 Investition</h2>
-    <p>Gesamtpreis: 8.888 € (ca. ¥1.600.000)<br>
-    Enthalten sind alle Leistungen, Unterkunft, Verpflegung & Coaching.</p>
-  </div>
+  <div class="section investment">
+    <h2>💰 Investition</h2>
+    <p>Gesamtpreis: 8.888 € (ca. ¥1.600.000)<br>
+    Enthalten sind alle Leistungen, Unterkunft, Verpflegung & Coaching.</p>
+  </div>
 
-    <div class="section cta">
-    <a class="cta-button" href="https://buy.stripe.com/eVq8wO0YB6oI1R001ucV20Z">💎 Jetzt Platz mit 1.000 € Anzahlung sichern</a>
-  </div>
+  <div class="section cta" style="text-align: center;">
+    <a class="cta-button" href="https://buy.stripe.com/eVq8wO0YB6oI1R001ucV20Z">💎 Jetzt Platz mit 1.000 € Anzahlung sichern</a>
+  </div>
 
-    <div class="section image-gallery">
-    <img src="https://cdn.pixabay.com/photo/2023/10/04/08/19/torii-7489492_1280.jpg" alt="Rotes Torii am Wasser, Japan">
-    <img src="https://cdn.pixabay.com/photo/2021/12/17/10/28/hawksbill-sea-turtle-6876325_1280.jpg" alt="Nahaufnahme einer Schildkröte unter Wasser, Okinawa">
-    <img src="https://cdn.pixabay.com/photo/2023/09/08/06/24/hateruma-island-8240409_1280.jpg" alt="Türkises Wasser und weißer Strand, Insel Hateruma Okinawa">
-    <img src="https://cdn.pixabay.com/photo/2019/03/11/11/55/karate-4047354_1280.jpg" alt="Karate-Training in einem traditionellen Dojo, Okinawa">
-    <img src="https://cdn.pixabay.com/photo/2021/12/28/04/51/beach-6899052_1280.jpg" alt="Tropischer Strand mit Palmen, Okinawa">
-  </div>
+  <div class="section image-gallery">
+    <img src="https://cdn.pixabay.com/photo/2023/10/04/08/19/torii-7489492_1280.jpg" alt="Torii Japan">
+    <img src="https://cdn.pixabay.com/photo/2021/12/17/10/28/hawksbill-sea-turtle-6876325_1280.jpg" alt="Schildkröte Okinawa">
+    <img src="https://cdn.pixabay.com/photo/2023/09/08/06/24/hateruma-island-8240409_1280.jpg" alt="Insel Hateruma">
+    <img src="https://cdn.pixabay.com/photo/2019/03/11/11/55/karate-4047354_1280.jpg" alt="Karate Okinawa">
+    <img src="https://cdn.pixabay.com/photo/2021/12/28/04/51/beach-6899052_1280.jpg" alt="Strand Okinawa">
+  </div>
 
-    <footer>
-    <p>Infinite Mind Retreat. All rights Reserved.</p>
-  </footer>
+  <footer>
+    <p>Infinite Mind Retreat. All rights Reserved.</p>
+  </footer>
 </body>
 </html>
