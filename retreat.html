@@ -1,259 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Infinite Mind Retreat – Okinawa, Japan</title>
-  <style>
-    body {
-      background-color: #fff0f5;
-      color: #333;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0 1rem;
-      text-align: center; /* zentriert Text in Body */
-    }
-    header {
-      background-color: #ffc1de;
-      padding: 2rem 1rem;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0 0 0.5rem 0;
-    }
-    header p {
-      font-size: 1.2rem;
-      margin: 0;
-      font-weight: 600;
-    }
-    .info-bar {
-      background-color: #ffb6c1;
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 0 auto 2rem auto;
-      max-width: 600px;
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      color: #5a0000;
-      font-weight: 700;
-    }
-    .info-bar > div {
-      flex: 1 1 120px;
-      min-width: 120px;
-    }
-    .section {
-      background-color: #fff0f5;
-      max-width: 600px;
-      margin: 0 auto 2rem auto;
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
-      text-align: center;
-    }
-    .section h2 {
-      margin-top: 0;
-      color: #cc3366;
-      font-size: 1.8rem;
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 1rem 0;
-      text-align: left;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    ul li {
-      margin-bottom: 0.6rem;
-      padding-left: 1.2rem;
-      position: relative;
-      font-weight: 600;
-      color: #8b004b;
-    }
-    ul li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #cc3366;
-      font-weight: 900;
-    }
-    a.cta-button {
-      display: inline-block;
-      background-color: #ffecf4;
-      color: #333;
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 5px;
-      font-size: 1.3rem;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-      margin-top: 1rem;
-    }
-    a.cta-button:hover {
-      background-color: #ffb6c1;
-      color: #fff;
-    }
-    .section.schedule p {
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-    .section.included ul {
-      max-width: 450px;
-    }
-    .section.image-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      max-width: 600px;
-      margin: 0 auto 3rem auto;
-    }
-    .section.image-gallery img {
-      width: 120px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(204, 51, 102, 0.4);
-    }
-    footer {
-      background-color: #ffecf4;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #8b004b;
-      font-weight: 600;
-    }
-    .lang-switcher {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-weight: 700;
-    }
-    .lang-switcher a {
-      text-decoration: none;
-      color: #cc3366;
-      font-size: 1.1rem;
-    }
-    .lang-switcher a:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Infinite Mind Retreat – Okinawa, Japan</title>
+    <style>
+        body {
+            background-color: #fff; /* White background */
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0 1rem;
+            text-align: center;
+        }
+        header {
+            background-color: #ffc1de;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        .info-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0 auto 2rem auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        .info-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-weight: 600;
+            color: #8b004b;
+        }
+        .info-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #cc3366;
+            font-weight: 900;
+        }
+        .section {
+            background-color: #fff0f5;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
+            text-align: center;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #cc3366;
+            font-size: 1.8rem;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        ul li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-weight: 600;
+            color: #8b004b;
+        }
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #cc3366;
+            font-weight: 900;
+        }
+        a.cta-button {
+            display: inline-block;
+            background-color: #ffecf4;
+            color: #333;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        a.cta-button:hover {
+            background-color: #ffb6c1;
+            color: #fff;
+        }
+        .section.schedule p {
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        .section.included ul {
+            max-width: 450px;
+        }
+        .section.image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+        }
+        .section.image-gallery img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(204, 51, 102, 0.4);
+        }
+        footer {
+            background-color: #ffecf4;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #8b004b;
+            font-weight: 600;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-weight: 700;
+        }
+        .lang-switcher a {
+            text-decoration: none;
+            color: #cc3366;
+            font-size: 1.1rem;
+        }
+        .lang-switcher a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <div class="lang-switcher">
-    <a href="retreat-de.html">🇩🇪 Deutsch</a>
-  </div>
-
-  <header>
-    <h1>🌟 Infinite Mind Retreat – Okinawa, Japan</h1>
-    <p>Unleash your inner warrior. Lead with clarity. Live with purpose.</p>
-  </header>
-
-  <div class="info-bar">
-    <div>📍 Okinawa, Japan</div>
-    <div>📅 June 7 &amp; 8</div>
-    <div>⏳ 2 days full of depth, clarity &amp; power</div>
-    <div>🎯 For: Founders, CEOs, Visionaries</div>
-    <div>🎟 Limited to 16 exclusive seats</div>
-    <div>💰 Investment: 8,888 € (~¥1,600,000)</div>
-  </div>
-
-  <div class="section retreat-vision">
-    <h2>🧭 Retreat Vision</h2>
-    <p>High performance meets ancient wisdom. The Infinite Mind Retreat is a transformative getaway for entrepreneurs who want to grow beyond themselves – in the cradle of longevity: Okinawa.</p>
-    <a class="cta-button" href="https://buy.stripe.com/eVq8wO0YB6oI1R001ucV20Z">💎 Secure your spot with 1,000 € deposit now</a>
-  </div>
-
-  <div class="section highlights">
-    <h2>🥋 Highlight Sessions</h2>
-    <ul>
-      <li>Seibukan Karate – focus &amp; grounding with local master</li>
-      <li>Okinawa tea ceremony &amp; slow thinking</li>
-      <li>Okinawa fuel – nutrition for a long life</li>
-      <li>Guided snorkeling – dive into the underwater world</li>
+    <div class="lang-switcher">
+        <a href="index-de.html">🇩🇪 Deutsch</a>
+    </div>
+    <header>
+        <h1>🌟 Infinite Mind Retreat – Okinawa, Japan</h1>
+        <p>Unleash your inner warrior. Lead with clarity. Live with purpose.</p>
+    </header>
+    <ul class="info-list">
+        <li>📍 Okinawa, Japan</li>
+        <li>📅 June 7 &amp; 8</li>
+        <li>⏳ 2 days full of depth, clarity &amp; power</li>
+        <li>🎯 For: Founders, CEOs, Visionaries</li>
+        <li>🎟 Limited to 16 exclusive spots</li>
+        <li>💰 Investment: €8,888 (~¥1,600,000)</li>
     </ul>
-  </div>
-
-  <div class="section extras">
-    <h2>✨ More Highlights</h2>
-    <ul>
-      <li>THE BIG IDEA DINNER</li>
-      <li>BORN TO CREATE</li>
-      <li>DEFINE YOUR DECADES CHALLENGE</li>
-      <li>THE 100 PARTY</li>
-      <li>INTUITION MASTERY</li>
-      <li>TOP 10 TENETS OF LEADERSHIP</li>
-      <li>INFINITE SELF LESSONS – networking</li>
-      <li>WINNING MINDSET DAILY ROUTINE</li>
-    </ul>
-  </div>
-
-  <div class="section schedule">
-    <h2>🧘‍♂️ Retreat Schedule</h2>
-    <p><strong>Day 1</strong><br />
-    Arrival &amp; check-in at boutique ryokan<br />
-    Welcome &amp; introduction<br />
-    THE BIG IDEA DINNER &amp; networking</p>
-    <p><strong>Day 2</strong><br />
-    Morning sports &amp; breathwork on the beach<br />
-    Seibukan karate with sensei<br />
-    Okinawa tea ceremony &amp; ikigai reflection<br />
-    Business vision session &amp; journaling<br />
-    Guided snorkeling adventure<br />
-    Sound healing &amp; closing circle<br />
-    Optional: therapeutic massage</p>
-    <p><em>(Schedule may vary slightly)</em></p>
-  </div>
-
-  <div class="section included">
-    <h2>💡 What's included?</h2>
-    <ul>
-      <li>✔ High-level mind &amp; leadership coaching</li>
-      <li>✔ Okinawa tea ceremony</li>
-      <li>✔ Seibukan karate introduction</li>
-      <li>✔ Ikigai journaling &amp; intention setting</li>
-      <li>✔ Meditation &amp; doing nothing on the beach</li>
-      <li>✔ Okinawa fuel nutrition</li>
-      <li>✔ Sound healing &amp; breathwork</li>
-      <li>✔ Electro detox – 100% offline time</li>
-      <li>✔ Guided snorkeling session</li>
-      <li>✔ Accommodation at boutique ryokan</li>
-      <li>✔ Personal retreat journal &amp; welcome package</li>
-      <li>✔ VIP integration call</li>
-      <li>➕ Add-on: therapeutic massage – €444</li>
-    </ul>
-  </div>
-
-  <div class="section investment">
-    <h2>💰 Investment</h2>
-    <p>Total price: €8,888 (~¥1,600,000)<br />
-    Includes all services, accommodation, meals &amp; coaching.</p>
-    <a class="cta-button" href="https://buy.stripe.com/eVq8wO0YB6oI1R001ucV20Z">💎 Secure your spot with 1,000 € deposit now</a>
-  </div>
-
-  <div class="section image-gallery">
-    <img src="turtle_640.jpg" alt="Turtle Okinawa" />
-    <img src="hateruma-island-7375081_640.jpg" alt="Hateruma Island" />
-    <img src="okinawa-3421799_640.jpg" alt="Okinawa Beach" />
-    <img src="sunset-5051305_640.jpg" alt="Okinawa Sunset" />
-    <img src="torii-7489492_640.jpg" alt="Torii Japan" />
-  </div>
-
-  <footer>
-    <p>Infinite Mind Retreat. All rights reserved.</p>
-  </footer>
+    <div class="section retreat-vision">
+        <h2>🧭 Retreat Vision</h2>
+        <p>High performance meets ancient wisdom. The Infinite Mind Retreat is a transformative sanctuary for entrepreneurs ready to grow beyond themselves – in the cradle of longevity: Okinawa.</p>
+        <a class="cta-button" href="https://buy.stripe.com/eVq8wO0YB6oI1R001ucV20Z">💎 Secure your spot now with €1,000 deposit</a>
+    </div>
+    <div class="section highlights">
+        <h2>🥋 Highlight Sessions</h2>
+        <ul>
+            <li>Seibukan Karate – Focus & grounding with a local master</li>
+            <li>Okinawa Tea Ceremony & slow thinking</li>
+            <li>Okinawa fuel – Nutrition for longevity</li>
+            <li>Guided snorkeling – Dive into the underwater world</li>
+        </ul>
+    </div>
+    <div class="section extras">
+        <h2>✨ Additional Highlights</h2>
+        <ul>
+          <li>The Big Idea Dinner</li>
+          <li>Born to Create</li>
+          <li>Define Your Decades Challenge</li>
+          <li>Intuition Mastery</li>
+          <li>"Hara hachi bu" – eat until you are 80% full</li>
+          <li>Infinite Self Lessons – Networking</li>
+          <li>Winning Mindset Daily Routine</li>
+        </ul>
+    </div>
+    <div class="section schedule">
+        <h2>🧘‍♂️ Retreat Schedule</h2>
+        <p><strong>Day 1</strong><br /> Arrival &amp; check-in at the boutique ryokan<br /> Welcome &amp; introduction<br /> THE BIG IDEA DINNER &amp; networking</p>
+        <p><strong>Day 2</strong><br /> Morning exercise & breathing by the beach<br /> Seibukan Karate with Sensei<br /> Okinawa Tea Ceremony & Ikigai reflection<br /> Business vision session & journaling<br /> Guided snorkeling adventure<br /> Sound healing & closing circle<br /> Optional: therapeutic massage</p>
+        <p><em>(Schedule may vary slightly)</em></p>
+    </div>
+    <div class="section included">
+        <h2>💡 Included Services</h2>
+        <ul>
+            <li>✔ Premium mind & leadership coaching</li>
+            <li>✔ Okinawa tea ceremony</li>
+            <li>✔ Introduction to Seibukan Karate</li>
+            <li>✔ Ikigai journaling & goal setting</li>
+            <li>✔ Meditation & mindful rest by the beach</li>
+            <li>✔ Okinawa fuel nutrition</li>
+            <li>✔ Sound healing & breathing exercises</li>
+            <li>✔ Electro detox – 100% offline time</li>
+            <li>✔ Guided snorkeling</li>
+            <li>✔ Accommodation at boutique ryokan</li>
+            <li>✔ Personal retreat journal & welcome package</li>
+            <li>✔ VIP integration call</li>
+            <li>➕ Optional: therapeutic massage – €444</li>
+        </ul>
+    </div>
+    <div class="section investment">
+        <h2>💰 Investment</h2>
+        <p>Total price: €8,888 (~¥1,600,000)<br /> Includes all services, accommodation, meals & coaching.</p>
+        <p>Reserve your spot with a €1,000 deposit — <a href="https://buy.stripe.com/eVq8wO0YB6oI1R001ucV20Z" class="cta-button">Secure My Spot</a></p>
+    </div>
+    <div class="section image-gallery">
+        <img src="images/okinawa-1.jpg" alt="Okinawa beach" />
+        <img src="images/okinawa-2.jpg" alt="Seibukan Karate" />
+        <img src="images/okinawa-3.jpg" alt="Okinawa tea ceremony" />
+        <img src="images/okinawa-4.jpg" alt="Snorkeling Okinawa" />
+    </div>
+    <footer>
+        &copy; 2025 Infinite Mind Retreat | All rights reserved
+    </footer>
 </body>
 </html>
