@@ -16,22 +16,25 @@
       position: relative;
     }
 
+
     body::before {
       content: "";
       position: fixed;
       top: 0;
-      left: 0;
+      right: 0;
       width: 100vw;
       height: 100vh;
       background-image: url('hatice-owl-logo.png');
-      background-repeat: repeat;
-      background-position: top left;
-      background-size: 300px 300px;
-      background-attachment: fixed;
+      background-repeat: repeat-y;
+      background-position: right;
+      background-size: auto 300px;
+      transform: rotate(-10deg);
+      transform-origin: top right;
       opacity: 0.3;
       z-index: 0;
       pointer-events: none;
     }
+
 
     body {
       display: flex;
