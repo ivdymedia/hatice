@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,34 +9,24 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
+      min-height: 100vh;
       font-family: sans-serif;
+      color: #000;
       background-color: #fff;
+
+      /* Hintergrundbild mehrfach wiederholt */
+      background-image: url('hatice-owl-logo.png');
+      background-repeat: repeat;
+      background-position: top left;
+      background-size: 300px 300px; /* Größe der Kacheln, anpassbar */
+      background-attachment: fixed;
     }
 
     body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      color: #000;
-      position: relative;
-    }
-
-    /* Hintergrund-Logo */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 60vw;
-      max-width: 800px;
-      height: auto;
-      transform: translate(-50%, -50%);
-      background: url('hatice-owl-logo.png') no-repeat center center;
-      background-size: contain;
-      opacity: 0.06; /* dezente Sichtbarkeit */
-      pointer-events: none;
-      z-index: 0;
+      padding: 2rem;
     }
 
     main {
@@ -45,7 +35,6 @@
       flex-direction: column;
       align-items: center;
       z-index: 1;
-      padding: 2rem;
     }
 
     h1 {
