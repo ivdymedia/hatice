@@ -87,6 +87,22 @@
     .footer-right a:hover {
       text-decoration: underline;
     }
+
+    .floating-hatice {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      z-index: 9999;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      .floating-hatice {
+        width: 150px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -119,5 +135,8 @@
       <a href="datenschutz.html">Datenschutz</a>
     </div>
   </footer>
+
+  <!-- Schwebendes Bild rechts unten -->
+  <img src="hatice-beach-removebg-preview.png" alt="Hatice" class="floating-hatice" />
 </body>
 </html>
