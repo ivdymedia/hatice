@@ -1,265 +1,158 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>World Travel Map | iammathemagician</title>
-  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
-  <!-- jVectorMap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/jquery-jvectormap.css" rel="stylesheet" />
-  <style>
-    html, body {
-      margin: 0; padding: 0; height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      background-color: #888888;
-      color: #000;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      position: relative;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      width: 100vw;
-      height: 100vh;
-      background-image: url('hatice-owl-logo.png');
-      background-repeat: repeat-y;
-      background-position: right top;
-      background-size: auto 320px;
-      transform: rotate(-15deg);
-      transform-origin: top right;
-      opacity: 0.15;
-      z-index: 0;
-      pointer-events: none;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      padding: 1rem;
-      position: relative;
-      max-width: 960px;
-      margin: 0 auto;
-      z-index: 1;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #222;
-    }
-
-    #world-map {
-      width: 100%;
-      height: 600px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      background-color: #888888;
-    }
-
-    /* Tooltip style */
-    .jvectormap-tip {
-      background: rgba(0,0,0,0.75);
-      color: white;
-      border-radius: 4px;
-      padding: 5px 8px;
-      font-size: 0.9rem;
-      pointer-events: none;
-      z-index: 10000 !important;
-      white-space: nowrap;
-    }
-
-    /* Popup style */
-    #country-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Travel Map</title>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #555;
+    font-family: Arial, sans-serif;
+  }
+  #map {
+    height: 100vh;
+    width: 100vw;
+  }
+  .country-tooltip {
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flag {
+    width: 24px;
+    height: 18px;
+    object-fit: contain;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+  }
+  .leaflet-popup-content {
+    font-size: 14px;
+    max-width: 300px;
+    line-height: 1.4;
+  }
+  @media (max-width: 600px) {
+    .leaflet-popup-content {
+      font-size: 16px;
       max-width: 90vw;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 1.5rem 2rem;
-      z-index: 11000;
-      display: none;
-      font-size: 1rem;
-      color: #222;
     }
-    #country-popup h2 {
-      margin-top: 0;
-      font-weight: 700;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    #country-popup img {
-      width: 32px;
-      height: 20px;
-      object-fit: contain;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-    #country-popup ul {
-      margin-top: 1rem;
-      padding-left: 1.2rem;
-      list-style-type: disc;
-    }
-    #country-popup button.close-btn {
-      background: #ff1e00;
-      border: none;
-      color: white;
-      font-weight: 700;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      cursor: pointer;
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.1rem;
-    }
-    #country-popup button.close-btn:hover {
-      background: #e21800;
-    }
-
-    /* Floating Hatice image */
-    .floating-hatice {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 200px;
-      z-index: 10500;
-      pointer-events: none;
-      user-select: none;
-      transition: width 0.3s ease;
-    }
-    @media (max-width: 768px) {
-      #world-map {
-        height: 400px;
-      }
-      .floating-hatice {
-        width: 150px;
-        bottom: 15px;
-        right: 15px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>🌐 World Travel Map</h1>
-  </header>
+<div id="map"></div>
 
-  <div id="world-map" role="application" aria-label="Interactive world travel map"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  // Your categories of countries by ISO 2-letter codes
+  const deepRedCountries = ["US", "DE", "TR", "PT"];
+  const redCountries = ["IT", "BE", "CZ", "MA"];
+  const yellowCountries = ["JP", "GB"];
 
-  <div id="country-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-    <button class="close-btn" aria-label="Close popup">&times;</button>
-    <h2 id="popup-title"><img id="popup-flag" alt="Country flag" /> <span id="popup-country-name"></span></h2>
-    <ul id="popup-info-list"></ul>
-  </div>
+  // Initialize map
+  const map = L.map("map").setView([20, 0], 2);
 
-  <img src="hatice-beach-removebg-preview.png" alt="Hatice" class="floating-hatice" />
+  // Add OpenStreetMap tile layer
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- jVectorMap -->
-  <script src="https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/jquery-jvectormap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/tests/assets/jquery-jvectormap-world-mill.js"></script>
+  // Determine country fill color by ISO code
+  function getColor(iso) {
+    if (deepRedCountries.includes(iso)) return "#8B0000"; // deep red
+    if (redCountries.includes(iso)) return "#d60000";     // red
+    if (yellowCountries.includes(iso)) return "#FFD700";  // yellow
+    return "#228B22";                                      // green
+  }
 
-  <script>
-    // Define countries status and colors
-    const homeBaseCountries = ['US', 'DE', 'TR']; // Deep red
-    const visitedCountries = ['IT', 'BE', 'PT', 'CZ', 'MA']; // Red
-    const plannedCountries = ['JP', 'GB']; // Yellow
-
-    // Colors
-    const colors = {
-      default: '#4caf50',    // green
-      visited: '#b71c1c',    // red (visited)
-      homeBase: '#7f0000',   // deep red (home base)
-      planned: '#fbc02d'     // yellow
+  // Style for each country polygon
+  function style(feature) {
+    return {
+      fillColor: getColor(feature.properties.ISO_A2),
+      weight: 0.7,
+      color: "#333",
+      fillOpacity: 0.85,
     };
+  }
 
-    // Wikipedia API fetch for summary bullets (returns list of important facts)
-    async function fetchWikiSummary(countryName) {
-      const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(countryName)}`;
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('No summary found');
-        const data = await response.json();
+  // Create HTML for flag image next to country name
+  function getFlag(iso) {
+    return `<img class="flag" src="https://flagcdn.com/w40/${iso.toLowerCase()}.png" alt="${iso} flag" loading="lazy"/>`;
+  }
 
-        // Extract first 5 bullet points from extract (simplified as split by ". " for demo)
-        if (!data.extract) return ["No information available."];
-        // Simplify splitting by sentences
-        let sentences = data.extract.split('. ').filter(s => s.trim() !== "");
-        let bullets = sentences.slice(0, 5).map(s => s.endsWith('.') ? s : s + '.');
-        return bullets.length ? bullets : ["No information available."];
-      } catch (e) {
-        return ["No information available."];
-      }
+  // Fetch summary info from Wikipedia REST API (limit to first 5 sentences)
+  async function fetchWikiInfo(countryName) {
+    try {
+      const response = await axios.get(
+        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(countryName)}`
+      );
+      const extract = response.data.extract || "";
+      const sentences = extract
+        .split(/\. |\.\n/)
+        .filter((s) => s.trim() !== "")
+        .slice(0, 5)
+        .map((s) => (s.trim().endsWith(".") ? s.trim() : s.trim() + "."));
+      return sentences.length ? sentences : ["No information available."];
+    } catch {
+      return ["No information available."];
     }
+  }
 
-    // Function to get flag URL for a country code (2-letter ISO)
-    function getFlagUrl(code) {
-      return `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
-    }
+  // On each country feature, add tooltip & popup interactions
+  function onEachFeature(feature, layer) {
+    const countryName = feature.properties.ADMIN;
+    const iso = feature.properties.ISO_A2;
 
-    $(function() {
-      // Prepare colors object for jVectorMap
-      const mapColors = {};
-      // First set all countries green
-      $('#world-map').vectorMap({
-        map: 'world_mill',
-        backgroundColor: '#888888',
-        regionStyle: {
-          initial: {
-            fill: colors.default,
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 0
-          }
-        },
-        series: {
-          regions: [{
-            values: mapColors,
-            attribute: 'fill'
-          }]
-        },
-        onRegionTipShow: function(e, el, code){
-          const name = el.html();
-          const flagUrl = getFlagUrl(code);
-          el.html(`<img src="${flagUrl}" alt="Flag of ${name}" style="width:18px; height:12px; vertical-align:middle; margin-right:6px; border:1px solid #ccc;"/> ${name}`);
-        },
-        onRegionClick: async function(e, code) {
-          e.preventDefault();
-          const mapObject = $('#world-map').vectorMap('get', 'mapObject');
-          const countryName = mapObject.getRegionName(code);
+    layer.on("mouseover", function (e) {
+      const tooltipContent = `<div class="country-tooltip">${getFlag(
+        iso
+      )}<span>${countryName}</span></div>`;
+      layer.bindTooltip(tooltipContent, { sticky: true, offset: [0, -10] }).openTooltip(e.latlng);
+    });
 
-          // Show popup with loading text
-          $('#popup-country-name').text(countryName);
-          $('#popup-flag').attr('src', getFlagUrl(code));
-          $('#popup-info-list').html('<li>Loading information...</li>');
-          $('#country-popup').fadeIn();
+    layer.on("mouseout", function () {
+      layer.closeTooltip();
+    });
 
-          const summaryBullets = await fetchWikiSummary(countryName);
-          let listItems = summaryBullets.map(b => `<li>${b}</li>`).join('');
-          $('#popup-info-list').html(listItems);
-        }
-      });
+    layer.on("click", async function (e) {
+      const bullets = await fetchWikiInfo(countryName);
+      const htmlContent = `<strong>${countryName}</strong><ul>${bullets
+        .map((b) => `<li>${b}</li>`)
+        .join("")}</ul>`;
+      layer.bindPopup(htmlContent, { maxWidth: 300 }).openPopup(e.latlng);
+    });
+  }
 
-      // Set colors for countries after initialization
-      const mapObject = $('#world-map').vectorMap('get', 'mapObject');
+  // Load GeoJSON from the trusted dataset repo
+  fetch(
+    "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      L.geoJSON(data, { style, onEachFeature }).addTo(map);
+    })
+    .catch(() => {
+      alert("Error loading country data.");
+    });
 
-      // Set all
+  // Fix map on resize
+  window.addEventListener("resize", () => {
+    map.invalidateSize();
+  });
+</script>
+</body>
+</html>
