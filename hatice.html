@@ -6,36 +6,40 @@
   <title>iammathemagician</title>
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
   <style>
+    /* Reset & base */
     html, body {
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       color: #000;
       background-color: #fff;
       position: relative;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-
+    /* Background watermark */
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      right: 0;
+      top: 20px;       /* slight spacing from top */
+      right: 30px;     /* slight spacing from right */
       width: 100vw;
       height: 100vh;
       background-image: url('hatice-owl-logo.png');
       background-repeat: repeat-y;
-      background-position: right;
-      background-size: auto 300px;
-      transform: rotate(-10deg);
+      background-position: right top;
+      background-size: auto 320px; /* slightly bigger */
+      transform: rotate(-15deg);
       transform-origin: top right;
       opacity: 0.3;
       z-index: 0;
       pointer-events: none;
     }
 
-
+    /* Body layout */
     body {
       display: flex;
       flex-direction: column;
@@ -52,34 +56,51 @@
       align-items: center;
       z-index: 1;
       position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     h1 {
       margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-align: center;
     }
 
     ul {
       list-style: none;
       padding: 0;
       margin-bottom: 2rem;
+      width: 100%;
     }
 
-    li {
+    ul li {
       margin: 0.5rem 0;
     }
 
     a {
       color: #007acc;
       text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: inline-block;
+      transition: color 0.3s ease;
     }
 
-    a:hover {
+    a:hover,
+    a:focus {
       text-decoration: underline;
+      color: #005fa3;
+      outline: none;
     }
 
     .promo {
       margin-top: 2rem;
       font-style: italic;
+      font-size: 1rem;
+      text-align: center;
+      line-height: 1.4;
     }
 
     footer {
@@ -92,45 +113,66 @@
       color: #fff;
       z-index: 1;
       position: relative;
+      flex-wrap: wrap;
     }
 
     .footer-left,
     .footer-center,
     .footer-right {
-      flex: 1;
+      flex: 1 1 100%;
       text-align: center;
+      margin: 0.3rem 0;
     }
 
-    .footer-left {
-      text-align: left;
-    }
+    @media(min-width: 600px) {
+      .footer-left {
+        text-align: left;
+        flex: 1 1 33%;
+      }
 
-    .footer-right {
-      text-align: right;
+      .footer-center {
+        text-align: center;
+        flex: 1 1 33%;
+      }
+
+      .footer-right {
+        text-align: right;
+        flex: 1 1 33%;
+      }
     }
 
     .footer-right a {
       margin-left: 1rem;
-      color: #000;
+      color: #fff;
+      font-weight: 300; /* thin */
+      transition: color 0.3s ease;
+      text-decoration: none;
     }
 
-    .footer-right a:hover {
+    .footer-right a:hover,
+    .footer-right a:focus {
+      color: #ddd;
       text-decoration: underline;
+      outline: none;
     }
 
+    /* Floating Hatice image */
     .floating-hatice {
       position: fixed;
-      bottom: 0;
-      right: 0;
+      bottom: 20px;  /* moved 20px up from bottom */
+      right: 20px;   /* moved 20px left from right edge */
       width: 200px;
       z-index: 2;
       pointer-events: none;
       user-select: none;
+      transition: width 0.3s ease;
     }
 
     @media (max-width: 768px) {
       .floating-hatice {
         width: 150px;
+        bottom: 15px;
+        right: 15px;
       }
     }
   </style>
@@ -146,9 +188,10 @@
       <li><a href="https://ivdymedia.github.io/ivdy/retreat.html">🌊 Join me</a></li>
       <li><a href="https://linktr.ee/hatitc">📸 Social Media</a></li>
       <li><a href="https://www.youtube.com/channel/UC18OMdLsH3RCAk0VC_g2buA?view_as=subscriber">🎥 YouTube</a></li>
+      <li><a href="travel.html">🌐 World Travel Map</a></li>
     </ul>
     <div class="promo">
-      💸 Beyond Thought. Into Power. Join NACARI community <a href="https://ivdyme.github.io/nacari/nacari.html"> NACARI Club</a>
+      💸 Beyond Thought. Into Power. Join NACARI community <a href="https://ivdyme.github.io/nacari/nacari.html">NACARI Club</a><br />
       🏎️ Beyond Speed. Excellent German Engineering. Join EULE Club <a href="https://euleclub.gumroad.com/l/eule-fan?_gl=1*45e6mz*_ga*MzgzOTk1NzM0LjE3NDczOTcwNTc.*_ga_6LJN6D94N6*czE3NDc3NTA4MzQkbzUkZzEkdDE3NDc3NTA4MzUkajAkbDAkaDA.">EULE Club</a>
     </div>
   </main>
