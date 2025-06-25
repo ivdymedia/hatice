@@ -24,17 +24,17 @@
     body::before {
       content: "";
       position: fixed;
-      top: 20px;       /* slight spacing from top */
-      right: 30px;     /* slight spacing from right */
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
       background-image: url('hatice-owl-logo.png');
-      background-repeat: repeat-y;
-      background-position: right top;
-      background-size: auto 320px; /* slightly bigger */
-      transform: rotate(-15deg);
-      transform-origin: top right;
-      opacity: 0.3;
+      background-repeat: repeat;
+      background-position: center center;
+      background-size: 150px 150px;
+      opacity: 0.1;
+      transform: rotate(15deg);
+      transform-origin: center center;
       z-index: 0;
       pointer-events: none;
     }
