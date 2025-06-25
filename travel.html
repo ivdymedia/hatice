@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>World Travel Map | iammathemagician</title>
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+  <!-- jVectorMap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/jquery-jvectormap.css" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: #888888;
+      color: #000;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('hatice-owl-logo.png');
+      background-repeat: repeat-y;
+      background-position: right top;
+      background-size: auto 320px;
+      transform: rotate(-15deg);
+      transform-origin: top right;
+      opacity: 0.15;
+      z-index: 0;
+      pointer-events: none;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 1rem;
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #222;
+    }
+
+    #world-map {
+      width: 100%;
+      height: 600px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      background-color: #888888;
+    }
+
+    /* Tooltip style */
+    .jvectormap-tip {
+      background: rgba(0,0,0,0.75);
+      color: white;
+      border-radius: 4px;
+      padding: 5px 8px;
+      font-size: 0.9rem;
+      pointer-events: none;
+      z-index: 10000 !important;
+      white-space: nowrap;
+    }
+
+    /* Popup style */
+    #country-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-width: 90vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+      z-index: 11000;
+      display: none;
+      font-size: 1rem;
+      color: #222;
+    }
+    #country-popup h2 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #country-popup img {
+      width: 32px;
+      height: 20px;
+      object-fit: contain;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    #country-popup ul {
+      margin-top: 1rem;
+      padding-left: 1.2rem;
+      list-style-type: disc;
+    }
+    #country-popup button.close-btn {
+      background: #ff1e00;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.1rem;
+    }
+    #country-popup button.close-btn:hover {
+      background: #e21800;
+    }
+
+    /* Floating Hatice image */
+    .floating-hatice {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 200px;
+      z-index: 10500;
+      pointer-events: none;
+      user-select: none;
+      transition: width 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      #world-map {
+        height: 400px;
+      }
+      .floating-hatice {
+        width: 150px;
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌐 World Travel Map</h1>
+  </header>
+
+  <div id="world-map" role="application" aria-label="Interactive world travel map"></div>
+
+  <div id="country-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <button class="close-btn" aria-label="Close popup">&times;</button>
+    <h2 id="popup-title"><img id="popup-flag" alt="Country flag" /> <span id="popup-country-name"></span></h2>
+    <ul id="popup-info-list"></ul>
+  </div>
+
+  <img src="hatice-beach-removebg-preview.png" alt="Hatice" class="floating-hatice" />
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- jVectorMap -->
+  <script src="https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/jquery-jvectormap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/tests/assets/jquery-jvectormap-world-mill.js"></script>
+
+  <script>
+    // Define countries status and colors
+    const homeBaseCountries = ['US', 'DE', 'TR']; // Deep red
+    const visitedCountries = ['IT', 'BE', 'PT', 'CZ', 'MA']; // Red
+    const plannedCountries = ['JP', 'GB']; // Yellow
+
+    // Colors
+    const colors = {
+      default: '#4caf50',    // green
+      visited: '#b71c1c',    // red (visited)
+      homeBase: '#7f0000',   // deep red (home base)
+      planned: '#fbc02d'     // yellow
+    };
+
+    // Wikipedia API fetch for summary bullets (returns list of important facts)
+    async function fetchWikiSummary(countryName) {
+      const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(countryName)}`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('No summary found');
+        const data = await response.json();
+
+        // Extract first 5 bullet points from extract (simplified as split by ". " for demo)
+        if (!data.extract) return ["No information available."];
+        // Simplify splitting by sentences
+        let sentences = data.extract.split('. ').filter(s => s.trim() !== "");
+        let bullets = sentences.slice(0, 5).map(s => s.endsWith('.') ? s : s + '.');
+        return bullets.length ? bullets : ["No information available."];
+      } catch (e) {
+        return ["No information available."];
+      }
+    }
+
+    // Function to get flag URL for a country code (2-letter ISO)
+    function getFlagUrl(code) {
+      return `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
+    }
+
+    $(function() {
+      // Prepare colors object for jVectorMap
+      const mapColors = {};
+      // First set all countries green
+      $('#world-map').vectorMap({
+        map: 'world_mill',
+        backgroundColor: '#888888',
+        regionStyle: {
+          initial: {
+            fill: colors.default,
+            "fill-opacity": 1,
+            stroke: 'none',
+            "stroke-width": 0,
+            "stroke-opacity": 0
+          }
+        },
+        series: {
+          regions: [{
+            values: mapColors,
+            attribute: 'fill'
+          }]
+        },
+        onRegionTipShow: function(e, el, code){
+          const name = el.html();
+          const flagUrl = getFlagUrl(code);
+          el.html(`<img src="${flagUrl}" alt="Flag of ${name}" style="width:18px; height:12px; vertical-align:middle; margin-right:6px; border:1px solid #ccc;"/> ${name}`);
+        },
+        onRegionClick: async function(e, code) {
+          e.preventDefault();
+          const mapObject = $('#world-map').vectorMap('get', 'mapObject');
+          const countryName = mapObject.getRegionName(code);
+
+          // Show popup with loading text
+          $('#popup-country-name').text(countryName);
+          $('#popup-flag').attr('src', getFlagUrl(code));
+          $('#popup-info-list').html('<li>Loading information...</li>');
+          $('#country-popup').fadeIn();
+
+          const summaryBullets = await fetchWikiSummary(countryName);
+          let listItems = summaryBullets.map(b => `<li>${b}</li>`).join('');
+          $('#popup-info-list').html(listItems);
+        }
+      });
+
+      // Set colors for countries after initialization
+      const mapObject = $('#world-map').vectorMap('get', 'mapObject');
+
+      // Set all
