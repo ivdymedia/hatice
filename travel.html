@@ -1,158 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>My Travel Map</title>
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet/dist/leaflet.css"
-/>
-<style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #555;
-    font-family: Arial, sans-serif;
-  }
-  #map {
-    height: 100vh;
-    width: 100vw;
-  }
-  .country-tooltip {
-    background: #fff;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 14px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .flag {
-    width: 24px;
-    height: 18px;
-    object-fit: contain;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-  }
-  .leaflet-popup-content {
-    font-size: 14px;
-    max-width: 300px;
-    line-height: 1.4;
-  }
-  @media (max-width: 600px) {
-    .leaflet-popup-content {
-      font-size: 16px;
-      max-width: 90vw;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Travel Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #555;
+      font-family: Arial, sans-serif;
     }
-  }
-</style>
+    #map {
+      height: 100vh;
+      width: 100vw;
+    }
+    .country-tooltip {
+      background: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .flag {
+      width: 24px;
+      height: 18px;
+      object-fit: contain;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+    }
+    .leaflet-popup-content {
+      font-size: 14px;
+      max-width: 300px;
+      line-height: 1.4;
+    }
+    @media (max-width: 600px) {
+      .leaflet-popup-content {
+        font-size: 16px;
+        max-width: 90vw;
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="map"></div>
+  <div id="map"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-  // Your categories of countries by ISO 2-letter codes
-  const deepRedCountries = ["DE", "TR"];
-  const redCountries = ["US", "IT", "BE", "CZ", "MA", "PT"];
-  const yellowCountries = ["JP", "GB"];
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const deepRedCountries = ["DE", "TR"];
+    const redCountries = ["MA", "BA", "CZ", "BE", "PT", "NL", "NO", "SE", "DK", "FI", "US"];
+    const yellowCountries = ["JP", "GB"];
 
-  // Initialize map
-  const map = L.map("map").setView([20, 0], 2);
-
-  // Add OpenStreetMap tile layer
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
-
-  // Determine country fill color by ISO code
-  function getColor(iso) {
-    if (deepRedCountries.includes(iso)) return "#8B0000"; // deep red
-    if (redCountries.includes(iso)) return "#d60000";     // red
-    if (yellowCountries.includes(iso)) return "#FFD700";  // yellow
-    return "#228B22";                                      // green
-  }
-
-  // Style for each country polygon
-  function style(feature) {
-    return {
-      fillColor: getColor(feature.properties.ISO_A2),
-      weight: 0.7,
-      color: "#333",
-      fillOpacity: 0.85,
+    // Country metadata
+    const countryMeta = {
+      DE: { capital: "Berlin", language: "German" },
+      TR: { capital: "Ankara", language: "Turkish" },
+      MA: { capital: "Rabat", language: "Arabic" },
+      BA: { capital: "Sarajevo", language: "Bosnian, Croatian, Serbian" },
+      CZ: { capital: "Prague", language: "Czech" },
+      BE: { capital: "Brussels", language: "Dutch, French, German" },
+      PT: { capital: "Lisbon", language: "Portuguese" },
+      NL: { capital: "Amsterdam", language: "Dutch" },
+      NO: { capital: "Oslo", language: "Norwegian" },
+      SE: { capital: "Stockholm", language: "Swedish" },
+      DK: { capital: "Copenhagen", language: "Danish" },
+      FI: { capital: "Helsinki", language: "Finnish, Swedish" },
+      US: { capital: "Washington, D.C.", language: "English" },
+      JP: { capital: "Tokyo", language: "Japanese" },
+      GB: { capital: "London", language: "English" }
     };
-  }
 
-  // Create HTML for flag image next to country name
-  function getFlag(iso) {
-    return `<img class="flag" src="https://flagcdn.com/w40/${iso.toLowerCase()}.png" alt="${iso} flag" loading="lazy"/>`;
-  }
+    const map = L.map("map").setView([20, 0], 2);
 
-  // Fetch summary info from Wikipedia REST API (limit to first 5 sentences)
-  async function fetchWikiInfo(countryName) {
-    try {
-      const response = await axios.get(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(countryName)}`
-      );
-      const extract = response.data.extract || "";
-      const sentences = extract
-        .split(/\. |\.\n/)
-        .filter((s) => s.trim() !== "")
-        .slice(0, 5)
-        .map((s) => (s.trim().endsWith(".") ? s.trim() : s.trim() + "."));
-      return sentences.length ? sentences : ["No information available."];
-    } catch {
-      return ["No information available."];
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    function getColor(iso) {
+      if (deepRedCountries.includes(iso)) return "#8B0000";
+      if (redCountries.includes(iso)) return "#d60000";
+      if (yellowCountries.includes(iso)) return "#FFD700";
+      return "#228B22";
     }
-  }
 
-  // On each country feature, add tooltip & popup interactions
-  function onEachFeature(feature, layer) {
-    const countryName = feature.properties.ADMIN;
-    const iso = feature.properties.ISO_A2;
+    function style(feature) {
+      return {
+        fillColor: getColor(feature.properties.ISO_A2),
+        weight: 0.7,
+        color: "#333",
+        fillOpacity: 0.85,
+      };
+    }
 
-    layer.on("mouseover", function (e) {
-      const tooltipContent = `<div class="country-tooltip">${getFlag(
-        iso
-      )}<span>${countryName}</span></div>`;
-      layer.bindTooltip(tooltipContent, { sticky: true, offset: [0, -10] }).openTooltip(e.latlng);
+    function getFlag(iso) {
+      return `<img class="flag" src="https://flagcdn.com/w40/${iso.toLowerCase()}.png" alt="${iso} flag" loading="lazy"/>`;
+    }
+
+    function onEachFeature(feature, layer) {
+      const countryName = feature.properties.ADMIN;
+      const iso = feature.properties.ISO_A2;
+
+      layer.on("mouseover", function (e) {
+        const tooltipContent = `<div class="country-tooltip">${getFlag(iso)}<span>${countryName}</span></div>`;
+        layer.bindTooltip(tooltipContent, { sticky: true, offset: [0, -10] }).openTooltip(e.latlng);
+      });
+
+      layer.on("mouseout", function () {
+        layer.closeTooltip();
+      });
+
+      layer.on("click", function (e) {
+        const meta = countryMeta[iso];
+        const content = `
+          <div style="text-align:left">
+            <h4>${getFlag(iso)} ${countryName}</h4>
+            <p><strong>Capital:</strong> ${meta ? meta.capital : "Unknown"}</p>
+            <p><strong>Language:</strong> ${meta ? meta.language : "Unknown"}</p>
+          </div>
+        `;
+        layer.bindPopup(content, { maxWidth: 300 }).openPopup(e.latlng);
+      });
+    }
+
+    fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
+      .then((res) => res.json())
+      .then((data) => {
+        L.geoJSON(data, { style, onEachFeature }).addTo(map);
+      })
+      .catch(() => {
+        alert("Error loading country data.");
+      });
+
+    window.addEventListener("resize", () => {
+      map.invalidateSize();
     });
-
-    layer.on("mouseout", function () {
-      layer.closeTooltip();
-    });
-
-    layer.on("click", async function (e) {
-      const bullets = await fetchWikiInfo(countryName);
-      const htmlContent = `<strong>${countryName}</strong><ul>${bullets
-        .map((b) => `<li>${b}</li>`)
-        .join("")}</ul>`;
-      layer.bindPopup(htmlContent, { maxWidth: 300 }).openPopup(e.latlng);
-    });
-  }
-
-  // Load GeoJSON from the trusted dataset repo
-  fetch(
-    "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      L.geoJSON(data, { style, onEachFeature }).addTo(map);
-    })
-    .catch(() => {
-      alert("Error loading country data.");
-    });
-
-  // Fix map on resize
-  window.addEventListener("resize", () => {
-    map.invalidateSize();
-  });
-</script>
+  </script>
 </body>
 </html>
