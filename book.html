@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Art of Kicking Ass | Effortless Success for Ambitious Women</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #ff8ca0;
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #222;
+    }
+    .center { display: flex; flex-direction: column; align-items: center; }
+    .headline {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: 1.5px;
+    }
+    .subheadline {
+      text-align: center;
+      font-size: 1.37rem;
+      margin-bottom: 2.2rem;
+      color: #6b1b63;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .book-img {
+      width: 220px;
+      max-width: 80vw;
+      margin: 1.2rem auto 2.3rem auto;
+      filter: drop-shadow(0 8px 24px rgba(34,34,34,0.12));
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+    }
+    .cta-btn {
+      background: #ed3571;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.26rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 12px rgba(237,53,113,0.15);
+      cursor: pointer;
+      margin-bottom: 1.3rem;
+      margin-top: 0.5rem;
+      transition: background 0.17s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta-btn:hover, .cta-btn:focus { background: #d61a5e; }
+    .section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 2.3rem 1rem 1.5rem 1rem;
+    }
+    .section-heading {
+      font-size: 1.43rem;
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+      color: #222;
+      text-align: center;
+    }
+    .section-text { font-size: 1.12rem; color:#333; margin-bottom: 1.7rem; line-height:1.7; }
+    .solution {
+      background: #fff6fa;
+      border-radius: 12px;
+      padding: 1.5rem 1.1rem;
+      box-shadow: 0 2px 16px rgba(237,53,113,0.09);
+      margin-bottom: 2rem;
+      font-size: 1.09rem;
+      color: #6b1b63;
+      text-align:center;
+    }
+    .principles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.7rem;
+      margin-top: 2.1rem;
+      margin-bottom:2rem;
+    }
+    .principle {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.4rem 1rem 1.1rem 1rem;
+      box-shadow: 0 2px 16px rgba(34,34,34,0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      font-size: 1.02rem;
+      color: #222;
+    }
+    .principle-icon {
+      font-size: 2.1rem;
+      margin-top: 2px;
+    }
+    .principle-title {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #ed3571;
+    }
+    .testimonials {
+      margin: 2rem 0 2rem 0;
+      text-align: center;
+    }
+    .testimonial {
+      font-style: italic;
+      background: #fff;
+      border-left: 4px solid #ed3571;
+      margin: 0 auto 1.4rem auto;
+      padding: 1.3rem 1rem 1rem 1.2rem;
+      border-radius: 0 10px 10px 0;
+      max-width: 600px;
+      color: #444;
+      box-shadow: 0 1px 8px rgba(237,53,113,0.07);
+    }
+    .testimonial-author {
+      font-weight: 700;
+      color: #ed3571;
+      margin-top: 0.8rem;
+    }
+    .about-author {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem 1.2rem;
+      box-shadow: 0 2px 16px rgba(34,34,34,0.05);
+      max-width: 680px;
+      margin: 2.2rem auto;
+      text-align: center;
+      font-size: 1.11rem;
+      color: #444;
+    }
+    .author-photos {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+    }
+    .author-photo {
+      width: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(237,53,113,0.12);
+    }
+    .extra-author-photos {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+      margin-top: 1.1rem;
+    }
+    .final-cta {
+      background: #6b1b63;
+      color: #fff;
+      padding: 2.8rem 1rem 2rem 1rem;
+      text-align: center;
+      margin-top: 2.4rem;
+    }
+    .final-cta h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .final-cta p {
+      font-size: 1.11rem;
+      margin-bottom: 2rem;
+      color: #fff;
+    }
+    .final-cta .cta-btn {
+      margin-bottom: 1.1rem;
+      background: #fff;
+      color: #ed3571;
+      font-weight:700;
+    }
+    .final-cta .cta-btn:hover {
+      background: #ffd6e3;
+    }
+    .final-cta .social-proof {
+      margin-top: 9px;
+      color: #ffd6e3;
+      font-weight: 600;
+    }
+    .footer {
+      max-width:900px;
+      margin:40px auto 0 auto;
+      padding: 24px 0 12px 0;
+      border-top: 1px solid #ed3571;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-family:Montserrat,Arial,sans-serif;
+      font-size:1rem;
+      color:#6b1b63;
+      flex-wrap: wrap;
+    }
+    .footer-left {
+      flex:1;
+      text-align:left;
+      min-width:200px;
+      margin-bottom: 6px;
+    }
+    .footer-center {
+      flex:1;
+      text-align:center;
+      min-width:200px;
+      margin-bottom: 6px;
+    }
+    .footer-right {
+      flex:1;
+      text-align:right;
+      min-width:200px;
+      margin-bottom: 6px;
+    }
+    .footer a {
+      color:#ed3571;
+      text-decoration:none;
+      margin-right:20px;
+    }
+    .footer a:last-child {
+      margin-right:0;
+    }
+    @media (max-width: 700px) {
+      .principles { grid-template-columns: 1fr; }
+      .principle { font-size: 0.99rem; }
+      .about-author { padding: 1.2rem 0.7rem; font-size: 0.99rem;}
+      .book-img { width: 140px; }
+      .author-photos, .extra-author-photos { flex-direction: column; gap: 10px; }
+      .author-photo { width: 95%; }
+      .footer { flex-direction: column; align-items: center; text-align: center;}
+      .footer-left, .footer-center, .footer-right { text-align: center; min-width:unset;}
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Above the Fold -->
+  <div class="center">
+    <div class="headline">The Art of Kicking Ass: The Entrepreneur’s Blueprint for Effortless Success</div>
+    <div class="subheadline">
+      Stop grinding. Start thriving.<br>
+      Discover the revolutionary philosophy for ambitious women ready to achieve more—without the burnout.
+    </div>
+    <!-- Book Cover Image -->
+    <img src="https://raw.githubusercontent.com/ivdymedia/hatice/main/assets/book-mockup.png" alt="The Art of Kicking Ass Book Cover" class="book-img">
+    <!-- CTA Button -->
+    <a class="cta-btn" href="#buy">Get Your Copy Now for 57€</a>
+  </div>
+
+  <!-- Problem & Solution Section -->
+  <div class="section">
+    <div class="section-heading">What If You Could Achieve Your Biggest Goals… Without the Hustle?</div>
+    <div class="section-text">
+      You’ve built your life on ambition, resilience, and hard work. But somewhere along the way, the grind started to take its toll.<br>
+      The late nights. The stress. The constant pressure to “do more” and “be more.”<br>
+      It’s exhausting—and it leads to burnout, not fulfillment.
+    </div>
+    <div class="solution">
+      <strong>The Art of Kicking Ass</strong> isn’t just another business strategy guide.<br>
+      It’s a radical, joyful blueprint—a philosophy that helps you tap into your inner wisdom and manifest the life you truly deserve.<br>
+      Whether your dream is building a power career, traveling the world, or creating a haven at home, this book shows you how to get what you want—now.<br>
+      <br>
+      Experience freedom, confidence, and success—without sacrificing your well-being.
+    </div>
+  </div>
+
+  <!-- Key Principles & Benefits -->
+  <div class="section">
+    <div class="section-heading">Key Principles & Benefits</div>
+    <div class="principles">
+      <div class="principle">
+        <span class="principle-icon">🧲</span>
+        <div>
+          <div class="principle-title">Magnetic Leadership</div>
+          <div>Attract opportunities and clients effortlessly, simply by being yourself.</div>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-icon">🦸‍♀️</span>
+        <div>
+          <div class="principle-title">Bulletproof Confidence</div>
+          <div>Lead with unshakable self-assurance and discover your innate power.</div>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-icon">🌱</span>
+        <div>
+          <div class="principle-title">Freedom from Burnout</div>
+          <div>Reclaim your health and happiness—find a sustainable, joyful path to the top.</div>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-icon">✨</span>
+        <div>
+          <div class="principle-title">Strategic Intuition</div>
+          <div>Trust your inner guidance; make the right moves, every time, with ease.</div>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-icon">💖</span>
+        <div>
+          <div class="principle-title">Manifest Your Desires</div>
+          <div>Fulfill your deepest wishes—career, relationships, finances, and well-being.</div>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-icon">🎉</span>
+        <div>
+          <div class="principle-title">Live Your Joy</div>
+          <div>Relax into your natural well-being and create the freedom you deserve.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials & Endorsements -->
+  <div class="testimonials">
+    <div class="testimonial">
+      “A game-changer for my career. It’s a powerful reminder that success doesn’t have to be a struggle.”
+      <div class="testimonial-author">– Sarah M., Entrepreneur</div>
+    </div>
+    <div class="testimonial">
+      “This is the business book I’ve been waiting for. It reframes what it means to be a powerful woman.”
+      <div class="testimonial-author">– Lisa T., Business Coach</div>
+    </div>
+  </div>
+
+  <!-- About the Book -->
+  <div class="section">
+    <div class="section-heading">About the Book</div>
+    <div class="section-text">
+      Are you ready to get what you want in life?<br>
+      Forget the old concept of tough feminism and fighting against the current. There’s no need to wait—every reason to claim what’s yours now.<br>
+      <strong>The Art Of Kicking Ass</strong> is your blueprint for manifesting desires, creating a life of joy, fulfillment, and true freedom.<br><br>
+      Hatice Tavli guides you through healing, liberation, and expansion. Discover how your relationships, health, finances, and career are shaped by your emotions and inner power.<br>
+      You don’t have to work so hard to get what you want. Living your dream can be fun, energizing, and effortless.<br><br>
+      <strong>This book is your path to peak self-confidence and well-being. You’ll discover how to:</strong>
+      <ul>
+        <li>Fulfill all your desires</li>
+        <li>Allow your inner guidance to show you the way</li>
+        <li>Relax happily into your natural well-being</li>
+        <li>Create the freedom you deserve</li>
+      </ul>
+      The Art Of Kicking Ass will shift everything for you. It provides a simple, powerful concept to achieve whatever you set your mind to—and it’s an art, unique to you.<br>
+      The secret? Understanding your emotions and tapping into the infinite power within.<br><br>
+      <strong>The Art of Kicking Ass</strong> is more than a slogan. It’s a philosophy of relentless self-love. A mindset. A conviction.<br>
+      The foundation of your life is freedom. The purpose of your life is unlimited bliss, creativity, and expansion.
+    </div>
+  </div>
+
+  <!-- About the Author -->
+  <div class="about-author">
+    <div class="author-photos">
+      <img src="https://raw.githubusercontent.com/ivdymedia/hatice/main/assets/author1.jpg" alt="Hatice Tavli with note" class="author-photo">
+      <img src="https://raw.githubusercontent.com/ivdymedia/hatice/main/assets/author2.jpg" alt="Hatice Tavli by the water" class="author-photo">
+      <img src="https://raw.githubusercontent.com/ivdymedia/hatice/main/assets/author3.jpg" alt="Hatice Tavli on motorcycle" class="author-photo">
+      <img src="https://raw.githubusercontent.com/ivdymedia/hatice/main/assets/author4.jpg" alt="Hatice Tavli portrait" class="author-photo">
+    </div>
+    <div><strong>Hatice Tavli</strong></div>
+    <div>
+      Hatice Tavli is a Turkish applied mathematician, born and raised in Essen, Germany. She is an entrepreneur, author, and public speaker, specializing in nonsmooth and nonconvex optimization, and has developed numerous algorithms with significant results.<br><br>
+      As the inventor of IVDY, a platform for excellent healthcare at the click of a button, Hatice combines her expertise in mathematics and medicine to drive innovation in the healthtech sector.<br><br>
+      She is also the founder of EULE Motorsports, reflecting her passion for technology and innovation in the automotive field.<br><br>
+      In addition to her entrepreneurial activities, Hatice is the author of <strong>"The Art of Kicking Ass"</strong>, a book that motivates readers to manifest their wishes and create a fulfilling life.<br><br>
+      As a digital nomad, Hatice travels extensively, shares her insights as a lifestyle influencer and speaker, and is particularly interested in motorcycles and the intersection of technology and humanism.
+    </div>
+    <div class="extra-author-photos">
+      <img src="hati-0.jpg" alt="Hatice Tavli photo 0" class="author-photo">
+      <img src="hati-1.jpg" alt="Hatice Tavli photo 1" class="author-photo">
+      <img src="hati-2.jpg" alt="Hatice Tavli photo 2" class="author-photo">
+      <img src="hati-3.jpg" alt="Hatice Tavli photo 3" class="author-photo">
+    </div>
+  </div>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <h2>Ready to Redefine Your Success?</h2>
+    <p>Your next promotion, your next breakthrough, your next adventure—it’s all waiting for you.<br>
+    <strong>The Art of Kicking Ass</strong> is your blueprint to claim it all, on your terms.</p>
+    <a class="cta-btn" href="#buy">Purchase Your Copy for 57€</a>
+    <div class="social-proof">
+      Click to purchase on my official store.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-left">
+      © 2025 Hatice Ventures. All Rights Reserved.
+    </div>
+    <div class="footer-center">
+      Made with ❤️ in Essen
+    </div>
+    <div class="footer-right">
+      <a href="datenschutz.html">Privacy Policy</a>
+      <a href="impressum.html">Imprint</a>
+      <a href="agb.html">Terms & Conditions</a>
+    </div>
+  </footer>
+</body>
+</html>
